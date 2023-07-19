@@ -59,7 +59,7 @@ export class EnvConfig implements EnvConfigInterface {
     this.firestorePrivateKey = EnvConfig.getEnv(
       configService,
       'FIRESTORE_PRIVATE_KEY',
-    );
+    ).replace(/\\n/g, '\n');
     this.firestoreClientEmail = EnvConfig.getEnv(
       configService,
       'FIRESTORE_CLIENT_EMAIL',
@@ -92,6 +92,13 @@ export class EnvConfig implements EnvConfigInterface {
 
   static initialize = (configService: ConfigService) => {
     EnvConfig._instance = new EnvConfig(configService);
+    return EnvConfig._instance;
+  };
+
+  static getInstance = () => {
+    if (!EnvConfig._instance) {
+      throw new Error('EnvConfig: initialize must be called first');
+    }
     return EnvConfig._instance;
   };
 
