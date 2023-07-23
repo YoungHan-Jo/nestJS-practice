@@ -12,7 +12,7 @@ export class UsersService {
     const signupVerifyToken = uuid.v1();
 
     await this.saveUser(name, email, password, signupVerifyToken);
-    await this.sendMemberJoinEmail(email, signupVerifyToken);
+    // await this.sendMemberJoinEmail(email, signupVerifyToken);
   };
 
   private checkUserExists = (email: string) => {
@@ -36,5 +36,26 @@ export class UsersService {
       email,
       signupVerifyToken,
     );
+  };
+
+  verifyEmail = async (signupVerifyToken: string) => {
+    // TODO
+    // 1. find user by signupVerifyToken, unless throw error
+    // 2. return jwt token
+    throw new Error('Not implemented yet');
+  };
+
+  login = async (email: string, password: string) => {
+    // TODO
+    // 1. find user by email, unless throw error
+    // 2. return jwt token
+    throw new Error('Not implemented yet');
+  };
+
+  getUserInfo = async (userId: string) => {
+    // TODO
+    // 1. find user by userId, unless throw error
+    // 2. return user info
+    throw new Error('Not implemented yet');
   };
 }
