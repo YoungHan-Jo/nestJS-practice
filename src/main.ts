@@ -1,15 +1,14 @@
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { EnvConfig } from './env';
-import { Firestore } from './infrastructure/firestore/client/firestore';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const config = new ConfigService();
-  EnvConfig.initialize(config);
-  Firestore.initialize();
-
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
   await app.listen(3000);
 }
 bootstrap();
